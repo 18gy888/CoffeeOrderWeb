@@ -3,24 +3,24 @@
         <div>
             <Carousel loop autoplay :autoplay-speed="3500" :radius-dot="true" arrow="hover" style="margin-top: 40px">
                 <CarouselItem>
-                    <div class="carousel-pic">1</div>
+                     <img src="@/assets/Carousel1.jpg"  style="width:100%" />
                 </CarouselItem>
                 <CarouselItem>
-                    <div class="carousel-pic">1</div>
+                    <img src="@/assets/Carousel2.jpg"  style="width:100%" />
                 </CarouselItem>
                 <CarouselItem>
-                    <div class="carousel-pic">1</div>
+                    <img src="@/assets/Carousel3.jpg"  style="width:100%" />
                 </CarouselItem>
             </Carousel>
-            <Card class="login-box" dis-hover :padding="24" style="margin-right:20px">
+            <Card class="login-box" dis-hover :padding="24" style="margin-right:6%;margin-top:4%;">
                 <Tabs value="name1">
                     <TabPane label="密码登录" name="name1">
                         <Form  style="margin-top: 16px" :model="logInModel" :rules="rules" ref="login">
                             <FormItem prop="userName">
-                                <Input prefix="md-person" placeholder="请输入账号" size="large" clearable v-model="logInModel.userName"/>
+                                <Input prefix="md-person" :maxlength="20" max placeholder="请输入账号" size="large" clearable v-model="logInModel.userName"/>
                             </FormItem>
                             <FormItem prop="password">
-                                <Input prefix="ios-lock" placeholder="请输入密码" size="large" type="password" @on-enter="logIn" v-model="logInModel.password" password/>
+                                <Input prefix="ios-lock" :maxlength="14" placeholder="请输入密码" size="large" type="password" @on-enter="logIn" v-model="logInModel.password" password/>
                             </FormItem>
                             <FormItem>
                                 <Button type="primary" long  size="large" keypress.enter.native ref="loginbutton" :loading="loading" @click="logIn">登录</Button>
@@ -59,9 +59,9 @@
                 </Tabs>
             </Card>
         </div>
-        <Row type="flex" style="margin-top: 24px" :gutter="24">
+        <Row type="flex" style="margin-top: 24px" :gutter="24"  v-if="meal">
             <i-col span="6" v-for="index in 4" :key="index">
-                <Card>
+                <Card v-if="meal[index]">
                     <div class="good">
                         <Tag class="tag" color="orange">店长推荐</Tag>
                         <img
@@ -82,7 +82,7 @@
         </Row>
         <Row type="flex" justify="space-between" style="margin-top: 24px; margin-bottom: 24px" :gutter="24">
             <i-col span="6" v-for="index in 4" :key="index">
-                <Card>
+                <Card v-if="meal[index+4]">
                     <div class="good">
                         <Tag class="tag" color="green">降价促销</Tag>
                        <img
